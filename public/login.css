@@ -1,0 +1,16 @@
+.bg-cover {
+    background-image: url("./login_images/tasty_vegetables_salad-wallpaper-1920x1080.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main_color {
+    background-color: #91c642;
+    color: white;
+    border: none;
+}
+
+.main_color:hover {
+    background-color: #6f9a32;
+}
