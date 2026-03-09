@@ -19,16 +19,27 @@
                 
                 </div>
                 <h3 class="text-center mb-3">Sign up</h3>
+                <?php if (isset($errors['general'])): ?>
+                    <p class="error"><?= $errors['general'] ?></p>
+                <?php endif; ?>
+
                 <form method="POST" action="">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name="email">
                     </div>
+                    <?php if (isset($errors['email'])): ?>
+                        <p class="error"><?= $errors['email'] ?></p>
+                    <?php endif; ?>
+
     
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="••••••••" name="password">
                     </div>               
+                    <?php if (isset($errors['password'])): ?>
+                        <p class="error"><?= $errors['password'] ?></p>
+                    <?php endif; ?>
 
                     <button type="submit" class="btn btn-primary w-100 main_color">Sign up</button>
 

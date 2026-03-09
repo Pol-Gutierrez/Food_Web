@@ -29,3 +29,9 @@
 .main_color:hover {
     background-color: #6f9a32;
 }   
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+}

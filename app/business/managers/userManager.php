@@ -6,10 +6,13 @@ require_once __DIR__ . '/databaseManager.php';
 class userManager {
     // variable to store the instance of the class that interacts with the database:
     private $dbConnector;
+    // array para almacenar los errores que aparezcan:
+    private $errors;
 
     public function __construct() {
         // create a new instance of the class that connects to the database:
         $this->dbConnector = new databaseManager();
+        $this->errors = [];
     }
 
     // function to verify whether a password is valid or not:
@@ -25,23 +28,36 @@ class userManager {
         // if the format is not correct:
         if (is_null($valid_email)) {
             // indicate that an error occurred:
-            echo "The email is incorrect";
+            $this->errors['email'] = "Email does not follow the correct format.";
         }
 
         // validate if the password has the correct format:
         if (!$this->isValidPassword($password)) {
             // indicate that an error occurred:
-            echo "The password is incorrect";
+            $this->errors['password'] = "Password does not follow the correct format.";
+        }
+
+        // check that they are not empty:
+        if (empty(($email))) {
+            // indicate that an error occurred:
+            $this->errors['email'] = "Field can not be empty.";
+        }
+
+        if (empty(($password))) {
+            // indicate that an error occurred:
+            $this->errors['password'] = "Field can not be empty.";
         }
 
         // check if the email already exists:
-        // (pending implementation)
+        if ($this->dbConnector->checkIfExists($email)) {
+            $this->errors['general'] = "Can not introduce this email.";
+        } 
+        if (empty($this->errors)) {
+            // call the database manager to insert the user:
+            $this->dbConnector->addUser($email, $password);
+        }
 
-        // call the database manager to insert the user:
-        $this->dbConnector->addUser($email, $password);
-
-        // return the result informing what happened:
-        // (pending implementation)
+        return $this->errors;
     }
 
 }

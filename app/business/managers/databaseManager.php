@@ -25,15 +25,32 @@ class databaseManager {
         $statement->bindParam(2, $user_password, PDO::PARAM_STR);
         
         // execute the query:
-        $ok = $statement->execute();
+        $statement->execute();
+    }
 
-        if ($ok) {
-            echo "Insert successful";
+    // function to check if the introduced email already exists:
+    public function checkIfExists($email) {
+        $statement = $this->connection->prepare(
+            'SELECT COUNT(*) AS total FROM Users WHERE email = ?'
+        );
+
+        // ensure the query does not generate SQL injection:
+        $statement->bindParam(1, $email, PDO::PARAM_STR);
+
+        // execute the query:
+        $statement->execute();
+
+        // get the results: 
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // access the "total" property:
+        $count = $results[0]['total'];
+        // if exists:
+        if ($count >= 1) {
+            return 1;
         } else {
-            echo "Error inserting";
+            return 0;
         }
-
-        echo "Insertion completed";
     }
 }
 

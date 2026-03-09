@@ -15,6 +15,7 @@ class authController {
 
     // function to execute the controller:
     public function runAuth() {
+        $errors = [];
         // once the form fields are filled and submitted:
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // read the data received:
@@ -23,9 +24,7 @@ class authController {
 
             // check that they are not empty:
             if (!is_null($user_email) && !is_null($user_password)) {
-                $this->manager->addNewUser($user_email, $user_password);
-            } else {
-                echo "The data is not valid";
+                $errors = $this->manager->addNewUser($user_email, $user_password);
             }
         }
 
