@@ -5,6 +5,21 @@
     background-repeat: no-repeat;
 }
 
+.bg-blur-layer {
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: blur(4px);
+
+    position: fixed;
+    top: 0;
+    left: 0;    
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
 .main_color {
     background-color: #91c642;
     color: white;
@@ -13,4 +28,4 @@
 
 .main_color:hover {
     background-color: #6f9a32;
-}
+}   
