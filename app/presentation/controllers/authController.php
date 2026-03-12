@@ -59,8 +59,8 @@ class authController {
         if (empty($errors)) {
             // in case no errors it means the user has been loged succesfully:
             $_SESSION['user_email'] = $user_email;
-            header('Location: search.php');
-            exit;
+            //header('Location: search.php');
+            //exit;
         }
 
         // include the HTML file that should be displayed:

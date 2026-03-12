@@ -7,7 +7,6 @@ require_once __DIR__ . '/../../business/managers/userManager.php';
 
 // class to store the controller that manages user authorization to access the website:
 class searchController {
-    
 
     // funcion principal para ejecutar la busqueda de recetas:
     public function search() {
@@ -24,7 +23,7 @@ class searchController {
 
         // once the form fields are filled and submitted:
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            echo "Se ha recibido una peticion.";
+            
         }
 
         // include the HTML file that should be displayed:
