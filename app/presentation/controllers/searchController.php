@@ -1,29 +1,45 @@
 <?php 
 
-//session_start();
+session_start();
 
 // required includes:
-require_once __DIR__ . '/../../business/managers/userManager.php';
+require_once __DIR__ . '/../../business/managers/apiManager.php';
 
 // class to store the controller that manages user authorization to access the website:
 class searchController {
+    // variable to store the manager instance for the API:
+    private $apiManager;
+    // variable to store the parameters used in the search:
+    private $searchParameters;
 
-    // funcion principal para ejecutar la busqueda de recetas:
+    // controller: 
+    public function __construct() {
+        $this->searchParameters = [];
+        $this->apiManager = new apiManager();
+    }
+
+    // main function to execute the search:
     public function search() {
-        // compruebo si el usuario ha iniciado previamente sesion: 
+        // check if the user has been previously logged:
         if (!isset($_SESSION['user_email'])) {
             // in case the user is not logged:
-            //echo "The user is not logged.";
             header('Location: login.php');
             exit;
-        }  else {
-            echo "No problem with the user.";
-            echo $_SESSION['user_email'];
         }
 
         // once the form fields are filled and submitted:
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            
+            // get the parameters entered by the user:
+            $fullSentence = trim($_POST['searchbar'] ?? " ");
+            $this->searchParameters = explode(" ", $fullSentence);
+
+            // I call the function to make a request to the API:
+            $data = $this->apiManager->makePetition($this->searchParameters);
+
+            foreach ($data['results'] as $receta) {
+                echo $receta['title'];
+                echo $receta['image'];
+            }
         }
 
         // include the HTML file that should be displayed:

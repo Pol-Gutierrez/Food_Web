@@ -6,7 +6,7 @@ require_once __DIR__ . '/databaseManager.php';
 class userManager {
     // variable to store the instance of the class that interacts with the database:
     private $dbConnector;
-    // array para almacenar los errores que aparezcan:
+    // array to store the errors obtained:
     private $errors;
 
     public function __construct() {
@@ -37,12 +37,6 @@ class userManager {
             // indicate that an error occurred:
             $this->errors['email'] = "Field can not be empty.";
         }
-
-
-        /*// check if the email already exists:
-        if ($this->dbConnector->checkIfExists($email)) {
-            $this->errors['general'] = "Can not introduce this email.";
-        }*/ 
     }
 
     
