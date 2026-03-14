@@ -1,17 +1,14 @@
 <?php
 
+require_once __DIR__ . '/database.php';
+
 class databaseManager {
     // variable to store the connection with the database:
     private $connection;
 
     // constructor:
     public function __construct() {
-        // create the new connection with the database:
-        $this->connection = new PDO(
-            'mysql:host=mysql;port=3306;dbname=project_db',
-            'pw2user',
-            'pw2pass'
-        );
+        $this->connection = Database::getInstance()->getConnection();
     }
 
     // function to add a new entry in the database:

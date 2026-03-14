@@ -42,3 +42,13 @@
     font-size: 0.9em;
     margin-top: 4px;
 }
+
+.bg-cover-detail {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-custom {
+    --bs-card-bg: #00FFFF;
+}

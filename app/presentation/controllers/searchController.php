@@ -35,16 +35,10 @@ class searchController {
 
             // I call the function to make a request to the API:
             $data = $this->apiManager->makePetition($this->searchParameters);
-
-            foreach ($data['results'] as $receta) {
-                echo $receta['title'];
-                echo $receta['image'];
-            }
         }
 
         // include the HTML file that should be displayed:
-        include __DIR__ . '/../views/search.html';
-        
+        include __DIR__ . '/../views/search.html';       
     }
 }
 
