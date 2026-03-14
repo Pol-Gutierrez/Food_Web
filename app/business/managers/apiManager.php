@@ -1,9 +1,9 @@
 <?php
 
 class apiManager {
-    // variable that contains the final url to wich i'm going to do the petition:
+    // variable that contains the final URL to which I'm going to make the request:
     private $final_url;
-    // variable that contains the url to wich i'm going to do the recipe information petition:
+    // variable that contains the URL to which I'm going to make the recipe information request:
     private $detail_url;
 
     // constructor:
@@ -13,9 +13,9 @@ class apiManager {
         $this->detail_url = "https://api.spoonacular.com/recipes/";
     }
 
-    // function to make an API petition:
+    // function to make an API request:
     public function makePetition($urlParameters) {
-        // function to crete the url based on the parameters: 
+        // function to create the URL based on the parameters:
         $this->urlFormation($urlParameters);
 
         //echo $this->final_url;
@@ -28,7 +28,7 @@ class apiManager {
         return $data;
     }
 
-    // function to create the url:
+    // function to create the URL:
     private function urlFormation($urlParameters) {
         $this->final_url .= $urlParameters[0];
 
@@ -36,7 +36,7 @@ class apiManager {
         foreach ($urlParameters as $value) {
             if ($i === 0) {
                 $i++;
-                continue; // jumps the first element.
+                continue; // skips the first element.
             }
 
             $this->final_url .= "&";
@@ -49,7 +49,7 @@ class apiManager {
         $this->final_url .= "&number=9&apiKey=e4d7bbf131444654abc221203638ba52";
     }
 
-    // funcion para solicitar la informacion especifica sobre una receta:
+    // function to request specific information about a recipe:
     public function obtainRecipeInfo($searchParameters) {
         // create the URL to which the request will be made:
         $this->detail_url .= $searchParameters;

@@ -28,9 +28,9 @@ class searchController {
         }
 
         // once the form fields are filled and submitted:
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
             // get the parameters entered by the user:
-            $fullSentence = trim($_POST['searchbar'] ?? " ");
+            $fullSentence = trim($_GET['searchbar'] ?? " ");
             $this->searchParameters = explode(" ", $fullSentence);
 
             // I call the function to make a request to the API:

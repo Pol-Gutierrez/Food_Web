@@ -17,7 +17,7 @@
 
         <!-- Search bar -->
         <div class="search-container" style="width: 100%; max-width: 400px;">
-            <form method="POST" action="search.php">
+            <form method="GET" action="search.php">
                 <input type="text" name="searchbar" id="searchbar" class="form-control search-input" placeholder="Search...">
             </form>
         </div>
@@ -34,9 +34,10 @@
                                         <h5 class="card-title"><?= $receta['title'] ?></h5>
                                     </div>                    
 
-                                    <a href="recipe.php?id=<?= $receta['id'] ?>" class="btn btn-success main_color">
+                                    <a href="recipe.php?id=<?= $receta['id'] ?>&return=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-success main_color">
                                         See more
                                     </a>
+
                                 </div>
                             </div>
                         <?php endforeach; ?>

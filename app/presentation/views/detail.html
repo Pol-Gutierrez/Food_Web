@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <div class="pt-4 ps-4">
+        <a href="<?= $returnUrl ?>" class="btn btn-success main_color">Back</a>
+    </div>
     <div class="card container card-custom mt-3">
         <div class="d-flex w-100 p-4 gap-3">
             <div class="d-flex flex-column gap-4">
@@ -21,9 +24,13 @@
                 </div>
 
                 <div>
-                    <form method="POST" action="favorite.php">
+                    <form method="POST" action="favorite_add.php">
+                        <input type="hidden" name="recipe_id" value="<?= $data['id'] ?>">
+                        <input type="hidden" name="recipe_img" value="<?= $data['image'] ?>">
+                        <input type="hidden" name="recipe_title" value="<?= $data['title'] ?>">
+                        <input type="hidden" name="return_url" value="<?= $_SERVER['REQUEST_URI'] ?>">
                         <button class="btn btn-success main_color">Add to Favorites</button>
-                    </form>
+                    </form>                
                 </div>
             </div>
     
