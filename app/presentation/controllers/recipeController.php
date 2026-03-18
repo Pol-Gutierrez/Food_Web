@@ -49,6 +49,8 @@ class recipeController {
             var_dump($data['image']);*/
 
             $returnUrl = $_GET['return'] ?? 'search.php';
+
+            //echo "$returnUrl";
         } else {
             $product_id = null;
         }

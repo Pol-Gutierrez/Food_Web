@@ -16,8 +16,8 @@ class favoriteController {
         $this->databaseManager = new databaseManager();
     }
 
-    // main function to add a new recipe into the favorites list:
-    public function addFavorite() {
+    // function to determine wich action needs to be done:
+    public function run() {
         // check if the user has previously logged in:
         if (!isset($_SESSION['user_email'])) {
             // in case the user is not logged in:
@@ -25,6 +25,30 @@ class favoriteController {
             exit;
         }        
 
+        // recive the action from the visual part: 
+        $action = $_POST['action'] ?? null;
+
+        /*echo "ANTES";
+        echo $action;
+        echo "DESPUES";*/
+
+        switch ($action) {
+            case 'add':
+                $this->addFavorite();
+                break;
+            case 'remove':
+                $this->removeFavorite();
+                break;
+            default:
+                $this->showFavoritesList();
+                /*break;
+            default:
+                echo "Acción no válida";*/
+        }
+    }
+
+    // main function to add a new recipe into the favorites list:
+    public function addFavorite() {
         // get the email field of the user who has logged in:
         $user_email = $_SESSION['user_email'];
         $user_id = $this->databaseManager->getUserByEmail($user_email);
@@ -54,6 +78,24 @@ class favoriteController {
     // main function to remove a recipe from the favorites list:
     public function removeFavorite() {
 
+    }
+
+    // main function to show the entire list of all the favorites recipes of the user:
+    public function showFavoritesList() {
+        /*echo'<script type="text/javascript">
+        alert("Tarea Guardada");
+        </script>';*/
+
+        $returnUrl = $_GET['return_url'] ?? 'search.php';
+
+        // get the email field of the user who has logged in:
+        $user_email = $_SESSION['user_email'];
+        $user_id = $this->databaseManager->getUserByEmail($user_email);
+
+        $data['results'] = $this->databaseManager->askForFavorites($user_id);
+
+        // include the HTML file that should be displayed:
+        include __DIR__ . '/../views/favorites.html';  
     }
 }
 

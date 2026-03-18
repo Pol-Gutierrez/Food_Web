@@ -10,26 +10,18 @@
 
 </head>
 
-<body class="bg-search-cover">
+<body class="favorites-image">
 
     <div class="container position-relative">
-        <form action="favorites.php" method="POST">
-            <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
-            <button class="btn btn-succes position-absolute top-20 start-10 translate-middle main_color" name="action">See favorites</button>
-            <button class="btn btn-succes position-absolute top-20 start-100 translate-middle main_color">Logout</button>
-        </form>
+        <a href="<?= $returnUrl ?>" class="btn btn-success position-absolute top-20 start-0 translate-middle main_color">Back</a>
+        <button class="btn btn-success position-absolute top-20 start-100 translate-middle main_color">Logout</button>
     </div>
         
     <div class="container d-flex flex-column align-items-center justify-content-center gap-5 mt-5">
         <!-- Logo -->
         <img src="./login_images/logo.png" alt="login" style="width: 150px;">
 
-        <!-- Search bar -->
-        <div class="search-container" style="width: 100%; max-width: 400px;">
-            <form method="GET" action="search.php">
-                <input type="text" name="searchbar" id="searchbar" class="form-control search-input" placeholder="Search...">
-            </form>
-        </div>
+        <h2 style="color: white;">Favorites</h2>
 
         <div id="cards-container">
             <div class="container mt-4">
@@ -43,19 +35,21 @@
                                         <h5 class="card-title"><?= $receta['title'] ?></h5>
                                     </div>                    
 
-                                    <a href="recipe.php?id=<?= $receta['id'] ?>&return=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-success main_color">
+                                    <a href="recipe.php?id=<?= $receta['recipe_id'] ?>&return=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-success main_color">
                                         See more
                                     </a>
 
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No se encontraron resultados para mostrar.</p>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="bg-blur-layer"></div>
+    <div class="favorites-blur"></div>
 </body>
 </html>

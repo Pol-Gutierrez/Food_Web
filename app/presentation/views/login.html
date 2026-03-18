@@ -37,16 +37,11 @@
                     </div>           
                     <?php if (isset($errors['password'])): ?>
                         <p class="error"><?= $errors['password'] ?></p>
-                    <?php endif; ?>
-    
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="remember">
-                        <label class="form-check-label" for="remember">Remember me</label>
-                    </div>                    
+                    <?php endif; ?>                  
 
                     <div class="d-grid gap-2 col-12 mx-auto">
-                        <button type="submit" class="btn btn-success w-100 main_color">Log in</button>
-                        <button type="submit" class="btn btn-success w-100 main_color">Sign up</button>
+                        <button type="submit" class="btn btn-success w-100 main_color" name="action" value="login">Log in</button>
+                        <button type="submit" class="btn btn-success w-100 main_color" name="action" value="register">Sign up</button>
                     </div>
 
                 </form>

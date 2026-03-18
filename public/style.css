@@ -27,6 +27,28 @@
     background-repeat: no-repeat;
 }
 
+.favorites-image {
+    background-image: url("./login_images/orange_food-wallpaper-1920x1080.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.favorites-blur {
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: blur(4px);
+
+    position: fixed;
+    top: 0;
+    left: 0;    
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
 .main_color {
     background-color: #91c642;
     color: white;

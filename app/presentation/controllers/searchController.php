@@ -27,6 +27,8 @@ class searchController {
             exit;
         }
 
+        $data = null;
+
         // once the form fields are filled and submitted:
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             // get the parameters entered by the user:

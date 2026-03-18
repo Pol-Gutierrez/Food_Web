@@ -173,6 +173,25 @@ class databaseManager {
             return 0;
         }
     }
+
+    // function to get the favorites list related to the user:
+    public function askForFavorites($user_id) {
+        $statement = $this->connection->prepare(
+            'SELECT r.recipe_id, r.title, r.image FROM Recipes AS r JOIN UserFavorites AS uf ON uf.recipe_id = r.recipe_id 
+            WHERE uf.user_id = ?'
+        );
+
+        // ensure the query does not generate SQL injection:
+        $statement->bindParam(1, $user_id, PDO::PARAM_INT);
+        
+        // execute the query:
+        $statement->execute();
+
+        // get the results:
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
 }
 
 ?>
