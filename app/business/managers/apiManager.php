@@ -12,7 +12,7 @@ class apiManager {
     // variables that contains the URL to which I'm going to make the recipe information request:
     private $baseSearchURL = 'https://api.spoonacular.com/recipes/complexSearch?query=';
     private $baseDetailURL = 'https://api.spoonacular.com/recipes/';
-    private $apiKey = '4621be74acdd4d08a52d6bf433a53cd8';
+    private $apiKey = 'f4fad94d58814fd092d3b59d8b3fd708';
 
     // constructor:
     public function __construct() {

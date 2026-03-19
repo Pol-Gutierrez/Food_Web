@@ -83,8 +83,22 @@ class databaseManager {
         );
 
         // ensure the query does not generate SQL injection:
-        $statement->bindParam(1, $user_id, PDO::PARAM_STR);
-        $statement->bindParam(2, $recipe_id, PDO::PARAM_STR);
+        $statement->bindParam(1, $user_id, PDO::PARAM_INT);
+        $statement->bindParam(2, $recipe_id, PDO::PARAM_INT);
+        
+        // execute the query:
+        $statement->execute();
+    }
+
+    // function to remove an entry from the UserFavorites table:
+    public function removeUserFavorites($user_id, $recipe_id) {
+        $statement = $this->connection->prepare(
+            'DELETE FROM UserFavorites WHERE user_id = ? AND recipe_id = ?'
+        );
+
+        // ensure the query does not generate SQL injection:
+        $statement->bindParam(1, $user_id, PDO::PARAM_INT);
+        $statement->bindParam(2, $recipe_id, PDO::PARAM_INT);
         
         // execute the query:
         $statement->execute();

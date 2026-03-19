@@ -4,6 +4,7 @@ session_start();
 
 // required includes:
 require_once __DIR__ . '/../../business/managers/apiManager.php';
+require_once __DIR__ . '/../../business/managers/databaseManager.php';
 
 // class to store the controller that manages the information shown to the user:
 class recipeController {
@@ -11,11 +12,18 @@ class recipeController {
     private $apiManager;
     // variable to store the parameters used in the search:
     private $searchParameters;
+    // variable to store the api manager instance:
+    private $databaseManager;
+
+    // variable to store the text that must appear in the favorites button:
+    private $btnText;
 
     // controller: 
     public function __construct() {
         $this->searchParameters = [];
         $this->apiManager = new apiManager();
+        $this->btnText = "Add to Favorites";
+        $this->databaseManager = new databaseManager();
     }
 
     // main function to execute the information deployment:
@@ -37,23 +45,23 @@ class recipeController {
             // make the API request to get the specific information:
             $data = $this->apiManager->obtainRecipeInfo($this->searchParameters);
 
-            //echo $data;
-            /*echo $data['title'];
-            echo "<br>";
-            echo "<img src='" . $data['image'] . "'>";
-            echo "<pre>";
-            print_r($data['extendedIngredients']);
-            echo "</pre>";
-            echo $data['instructions'];
-
-            var_dump($data['image']);*/
-
             $returnUrl = $_GET['return'] ?? 'search.php';
 
-            //echo "$returnUrl";
+            $btnText = $this->btnText;
+
         } else {
             $product_id = null;
         }
+
+
+        $user_email = $_SESSION['user_email'];
+        $user_id = $this->databaseManager->getUserByEmail($user_email);
+
+        $isFavorite = $this->databaseManager->checkIfExistsUserFavorites($user_id, $product_id);
+
+        $btnText = $isFavorite ? "Remove from Favorites" : "Add to Favorites";
+
+
         // include the HTML file that should be displayed:
         include __DIR__ . '/../views/detail.html';   
     }

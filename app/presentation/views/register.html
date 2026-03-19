@@ -10,42 +10,41 @@
 
 </head>
 
-<body> <!-- class="bg-cover" -->
-        <div class="container d-flex justify-content-center align-items-center vh-100">
-            <div class="rounded-5 card p-4 shadow-lg" style="width: 30rem;">
-                
-                <div class="text-center">
-                <img src="./login_images/logo.png" alt="login" style="width: 150px;">
-                
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="rounded-5 card p-4 shadow-lg" style="width: 30rem;">
+            
+            <div class="text-center">
+            <img src="./login_images/logo.png" alt="login" style="width: 150px;">
+            
+            </div>
+            <h3 class="text-center mb-3">Sign up</h3>
+            <?php if (isset($errors['general'])): ?>
+                <p class="error"><?= $errors['general'] ?></p>
+            <?php endif; ?>
+
+            <form method="POST" action="">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name="email">
                 </div>
-                <h3 class="text-center mb-3">Sign up</h3>
-                <?php if (isset($errors['general'])): ?>
-                    <p class="error"><?= $errors['general'] ?></p>
+                <?php if (isset($errors['email'])): ?>
+                    <p class="error"><?= $errors['email'] ?></p>
                 <?php endif; ?>
 
-                <form method="POST" action="">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name="email">
-                    </div>
-                    <?php if (isset($errors['email'])): ?>
-                        <p class="error"><?= $errors['email'] ?></p>
-                    <?php endif; ?>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="••••••••" name="password">
+                </div>               
+                <?php if (isset($errors['password'])): ?>
+                    <p class="error"><?= $errors['password'] ?></p>
+                <?php endif; ?>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="••••••••" name="password">
-                    </div>               
-                    <?php if (isset($errors['password'])): ?>
-                        <p class="error"><?= $errors['password'] ?></p>
-                    <?php endif; ?>
+                <button type="submit" class="btn btn-success w-100 main_color" name="action" value="register">Sign up</button>
 
-                    <button type="submit" class="btn btn-success w-100 main_color" name="action" value="register">Sign up</button>
+            </form>
 
-                </form>
-    
-            </div>
         </div>
-        <div class="bg-blur-layer"></div>
+    </div>
 </body>
 </html>

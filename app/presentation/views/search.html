@@ -10,8 +10,7 @@
 
 </head>
 
-<body> <!-- class="bg-search-cover" -->
-
+<body>
     <div class="container position-relative">
         <form action="favorites.php" method="POST">
             <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
@@ -21,25 +20,23 @@
     </div>
         
     <div class="container d-flex flex-column align-items-center justify-content-center gap-5 mt-5">
-        <!-- Logo -->
         <img src="./login_images/logo.png" alt="login" style="width: 150px;">
 
-        <!-- Search bar -->
         <div class="search-container" style="width: 100%; max-width: 400px;">
             <form method="GET" action="search.php">
                 <input type="text" name="searchbar" id="searchbar" class="form-control search-input" placeholder="Search...">
             </form>
         </div>
 
-        <div id="cards-container">
+        <div id="cards-container" class="w-100">
             <div class="container mt-4">
-                <div class="row">
+                <div class="row g-4 justify-content-center">
                     <?php if (empty($data['error'])): ?>
                         <?php if (!empty($data['results'])): ?>
                             <?php foreach ($data['results'] as $receta): ?>
-                                <div class="col-md-4">     
-                                    <div class="card" style="width: 18rem; margin: 10px; height: 25rem; padding: 5%;">
-                                        <img src="<?= $receta['image'] ?>" style="border-radius: 5%;" class="card-img-top" alt="Imagen receta">
+                                <div class="col-md-4 mt-4">     
+                                    <div class="card h-100 shadow border-1 rounded-4">
+                                        <img src="<?= $receta['image'] ?>" class="card-img-top rounded-4" alt="Imagen receta">
                                         <div class="card-body">
                                             <h5 class="card-title"><?= $receta['title'] ?></h5>
                                         </div>                    
@@ -52,16 +49,14 @@
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <p class="">No results were found.</p> <!-- text-white -->
+                            <p>No results were found.</p>
                         <?php endif; ?>
                     <?php else: ?>
-                        <p class=""><?= $data['error'] ?></p>
+                        <p class="text-center w-100"><?= $data['error'] ?></p>
                     <?php endif; ?>                                
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="bg-blur-layer"></div>
 </body>
 </html>

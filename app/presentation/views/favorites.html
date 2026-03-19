@@ -10,27 +10,26 @@
 
 </head>
 
-<body> <!-- class="favorites-image" -->
-
+<body>
     <div class="container position-relative">
         <a href="<?= $returnUrl ?>" class="btn btn-success position-absolute top-20 start-0 translate-middle main_color">Back</a>        
         <a href="logout.php" class="btn btn-success position-absolute top-20 start-100 translate-middle main_color">Logout</a>
     </div>    
         
     <div class="container d-flex flex-column align-items-center justify-content-center gap-5 mt-5">
-        <!-- Logo -->
         <img src="./login_images/logo.png" alt="login" style="width: 150px;">
 
-        <h2 class="text-white">Favorites</h2>
+        <h2>Favorites</h2>
 
-        <div id="cards-container">
+        <div id="cards-container" class="w-100">
             <div class="container mt-4">
-                <div class="row">
+                <div class="row g-4 justify-content-center">
                     <?php if (!empty($data['results'])): ?>
-                        <?php foreach ($data['results'] as $receta): ?>
-                            <div class="col-md-4">     
-                                <div class="card" style="width: 18rem; margin: 10px; height: 25rem; padding: 5%;">
-                                    <img src="<?= $receta['image'] ?>" style="border-radius: 5%;" class="card-img-top" alt="Imagen receta">
+                        <?php foreach ($data['results'] as $receta): ?>                        
+
+                            <div class="col-md-4 mt-4">     
+                                <div class="card h-100 shadow border-1 rounded-4">
+                                    <img src="<?= $receta['image'] ?>" class="card-img-top rounded-4" alt="Imagen receta">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $receta['title'] ?></h5>
                                     </div>                    
@@ -43,13 +42,12 @@
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <p class="">No results to show.</p> <!-- text-white -->
+                        <p>No results to show.</p> 
                     <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="favorites-blur"></div>
 </body>
 </html>
