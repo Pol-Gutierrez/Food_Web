@@ -16,35 +16,39 @@
     </div>
     <div class="card container card-custom mt-3">
         <div class="d-flex w-100 p-4 gap-3">
-            <div class="d-flex flex-column gap-4">
-                <div>
-                    <?php if (!empty($data['image'])): ?>
-                        <img src="<?= $data['image']?>" class="img-fluid rounded" alt="Food">
-                    <?php endif; ?>
-                </div>
+            <?php if (empty($data['error'])): ?>
+                <div class="d-flex flex-column gap-4">
+                    <div>
+                        <?php if (!empty($data['image'])): ?>
+                            <img src="<?= $data['image']?>" class="img-fluid rounded" alt="Food">
+                        <?php endif; ?>
+                    </div>
 
-                <div>
-                    <form method="POST" action="favorites.php">
-                        <input type="hidden" name="recipe_id" value="<?= $data['id'] ?>">
-                        <input type="hidden" name="recipe_img" value="<?= $data['image'] ?>">
-                        <input type="hidden" name="recipe_title" value="<?= $data['title'] ?>">
-                        <input type="hidden" name="return_url" value="<?= $_SERVER['REQUEST_URI'] ?>">
-                        <button class="btn btn-success main_color" name="action" value="add">Add to Favorites</button>
-                    </form>                
+                    <div>
+                        <form method="POST" action="favorites.php">
+                            <input type="hidden" name="recipe_id" value="<?= $data['id'] ?>">
+                            <input type="hidden" name="recipe_img" value="<?= $data['image'] ?>">
+                            <input type="hidden" name="recipe_title" value="<?= $data['title'] ?>">
+                            <input type="hidden" name="return_url" value="<?= $_SERVER['REQUEST_URI'] ?>">
+                            <button class="btn btn-success main_color" name="action" value="add">Add to Favorites</button>
+                        </form>                
+                    </div>
                 </div>
-            </div>
-    
-            <div class="card w-100">
-                <div class="card-body">
-                    <h5><?= $data['title']?></h5>
-                    <ul>
-                        <?php foreach ($data['extendedIngredients'] as $ingredient): ?>
-                            <li><?= $ingredient['original'] ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <p><?= $data['instructions']?></p>
+        
+                <div class="card w-100">
+                    <div class="card-body">
+                        <h5><?= $data['title']?></h5>
+                        <ul>
+                            <?php foreach ($data['extendedIngredients'] as $ingredient): ?>
+                                <li><?= $ingredient['original'] ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <p><?= $data['instructions']?></p>
+                    </div>
                 </div>
-            </div>
+            <?php else: ?>
+                <p class=""><?= $data['error'] ?></p>
+            <?php endif; ?>              
         </div>
     </div>
 </body>

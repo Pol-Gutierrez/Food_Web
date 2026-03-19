@@ -10,14 +10,14 @@
 
 </head>
 
-<body class="bg-search-cover">
+<body> <!-- class="bg-search-cover" -->
 
     <div class="container position-relative">
         <form action="favorites.php" method="POST">
             <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
             <button class="btn btn-succes position-absolute top-20 start-10 translate-middle main_color" name="action">See favorites</button>
-            <button class="btn btn-succes position-absolute top-20 start-100 translate-middle main_color">Logout</button>
         </form>
+        <a href="logout.php"class="btn btn-succes position-absolute top-20 start-100 translate-middle main_color">Logout</a>
     </div>
         
     <div class="container d-flex flex-column align-items-center justify-content-center gap-5 mt-5">
@@ -34,23 +34,29 @@
         <div id="cards-container">
             <div class="container mt-4">
                 <div class="row">
-                    <?php if (!empty($data['results'])): ?>
-                        <?php foreach ($data['results'] as $receta): ?>
-                            <div class="col-md-4">     
-                                <div class="card" style="width: 18rem; margin: 10px; height: 25rem; padding: 5%;">
-                                    <img src="<?= $receta['image'] ?>" style="border-radius: 5%;" class="card-img-top" alt="Imagen receta">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $receta['title'] ?></h5>
-                                    </div>                    
+                    <?php if (empty($data['error'])): ?>
+                        <?php if (!empty($data['results'])): ?>
+                            <?php foreach ($data['results'] as $receta): ?>
+                                <div class="col-md-4">     
+                                    <div class="card" style="width: 18rem; margin: 10px; height: 25rem; padding: 5%;">
+                                        <img src="<?= $receta['image'] ?>" style="border-radius: 5%;" class="card-img-top" alt="Imagen receta">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $receta['title'] ?></h5>
+                                        </div>                    
 
-                                    <a href="recipe.php?id=<?= $receta['id'] ?>&return=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-success main_color">
-                                        See more
-                                    </a>
+                                        <a href="recipe.php?id=<?= $receta['id'] ?>&return=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-success main_color">
+                                            See more
+                                        </a>
 
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p class="">No results were found.</p> <!-- text-white -->
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <p class=""><?= $data['error'] ?></p>
+                    <?php endif; ?>                                
                 </div>
             </div>
         </div>

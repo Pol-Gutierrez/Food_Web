@@ -10,18 +10,18 @@
 
 </head>
 
-<body class="favorites-image">
+<body> <!-- class="favorites-image" -->
 
     <div class="container position-relative">
-        <a href="<?= $returnUrl ?>" class="btn btn-success position-absolute top-20 start-0 translate-middle main_color">Back</a>
-        <button class="btn btn-success position-absolute top-20 start-100 translate-middle main_color">Logout</button>
-    </div>
+        <a href="<?= $returnUrl ?>" class="btn btn-success position-absolute top-20 start-0 translate-middle main_color">Back</a>        
+        <a href="logout.php" class="btn btn-success position-absolute top-20 start-100 translate-middle main_color">Logout</a>
+    </div>    
         
     <div class="container d-flex flex-column align-items-center justify-content-center gap-5 mt-5">
         <!-- Logo -->
         <img src="./login_images/logo.png" alt="login" style="width: 150px;">
 
-        <h2 style="color: white;">Favorites</h2>
+        <h2 class="text-white">Favorites</h2>
 
         <div id="cards-container">
             <div class="container mt-4">
@@ -43,7 +43,7 @@
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <p>No se encontraron resultados para mostrar.</p>
+                        <p class="">No results to show.</p> <!-- text-white -->
                     <?php endif; ?>
                 </div>
             </div>

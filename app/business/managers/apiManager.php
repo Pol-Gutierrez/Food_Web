@@ -1,32 +1,49 @@
 <?php
 
+require __DIR__ . '/../../../vendor/autoload.php';
+
+use GuzzleHttp\Client;
+
 class apiManager {
     // variable that contains the final URL to which I'm going to make the request:
     private $final_url;
-    // variable that contains the URL to which I'm going to make the recipe information request:
-    private $detail_url;
+    // client for guzzle:
+    private $client;
+    // variables that contains the URL to which I'm going to make the recipe information request:
+    private $baseSearchURL = 'https://api.spoonacular.com/recipes/complexSearch?query=';
+    private $baseDetailURL = 'https://api.spoonacular.com/recipes/';
+    private $apiKey = '4621be74acdd4d08a52d6bf433a53cd8';
 
     // constructor:
     public function __construct() {
-        // create the new connection with the database:
-        $this->final_url = "https://api.spoonacular.com/recipes/complexSearch?query=";
-        $this->detail_url = "https://api.spoonacular.com/recipes/";
+        $this->final_url = "";
+        $this->client = new Client();
     }
 
     // function to make an API request:
     public function makePetition($urlParameters) {
-        // function to create the URL based on the parameters:
-        $this->urlFormation($urlParameters);
+        try {
+            $this->urlFormation($urlParameters);
 
-        //echo $this->final_url;
-        //echo "<br>";
+            $query = [
+                'query' => $this->final_url,
+                'number' => 9,
+                'apiKey' => $this->apiKey
+            ];
 
-        $response = file_get_contents($this->final_url);
+            $response = $this->client->request('GET', $this->baseSearchURL, [
+                'query' => $query
+            ]);
 
-        $data = json_decode($response, true);
-        //$data = " ";
-        return $data;
+            $data = json_decode($response->getBody(), true);
+            
+            return $data;
+        } catch (Exception $e) {
+            $data['error'] = "An error occurred.";
+            return $data;
+        }
     }
+    
 
     // function to create the URL:
     private function urlFormation($urlParameters) {
@@ -44,28 +61,27 @@ class apiManager {
 
             $i++;
         }
-
-        // add the API key to access:
-        $this->final_url .= "&number=9&apiKey=e4d7bbf131444654abc221203638ba52";
     }
 
     // function to request specific information about a recipe:
     public function obtainRecipeInfo($searchParameters) {
-        // create the URL to which the request will be made:
-        $this->detail_url .= $searchParameters;
-        $this->detail_url .= "/information?apiKey=e4d7bbf131444654abc221203638ba52";
+        try {
+            $query = [
+                'apiKey' => $this->apiKey
+            ];
 
-        //echo $this->detail_url;
-        //echo "<br>";
+            $response = $this->client->request('GET', $this->baseDetailURL . $searchParameters . "/information", [
+                'query' => $query
+            ]);
 
-        $response = file_get_contents($this->detail_url);
-
-        $data = json_decode($response, true);
-        //$data = " ";
-
-        return $data;
-    }
-   
+            $data = json_decode($response->getBody(), true);
+            
+            return $data;
+        } catch (Exception $e) {
+            $data['error'] = "An error occurred.";
+            return $data;
+        }
+    }   
 }
 
 ?>

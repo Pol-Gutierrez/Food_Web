@@ -8,7 +8,7 @@ require_once __DIR__ . '/../app/presentation/controllers/authController.php';
 $controller = new authController();
 
 // execute the controller function:
-$controller->login();
-
+//$controller->login();
+$controller->run();
 
 ?>

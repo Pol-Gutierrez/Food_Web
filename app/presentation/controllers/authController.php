@@ -16,8 +16,26 @@ class authController {
         $this->manager = new userManager();
     }
 
+    // function to distribute the action to perform:
+    public function run() {
+        // recive the action from the visual part: 
+        $action = $_POST['action'] ?? null;
+
+        switch($action) {
+            case 'login':
+                $this->login();
+                break;
+            case 'register':
+                $this->register();
+                break;
+            default: 
+                // include the HTML file that should be displayed:
+                include __DIR__ . '/../views/login.html';
+        }
+    }
+
     // function to execute the register functionality:
-    public function register() {
+    private function register() {
         $errors = [];
         // once the form fields are filled and submitted:
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -41,7 +59,7 @@ class authController {
     }
 
     // function to execute the login functionality:
-    public function login() {
+    private function login() {
         $user_email = '';
         $errors = [];
         // once the form fields are filled and submitted:

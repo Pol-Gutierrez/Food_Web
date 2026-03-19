@@ -8,5 +8,6 @@
     $controller = new authController();
 
     // execute the controller function:
-    $controller->register();
+    //$controller->register();
+    $controller->run();
 ?>
