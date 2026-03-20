@@ -12,7 +12,7 @@ class apiManager {
     // variables that contains the URL to which I'm going to make the recipe information request:
     private $baseSearchURL = 'https://api.spoonacular.com/recipes/complexSearch?query=';
     private $baseDetailURL = 'https://api.spoonacular.com/recipes/';
-    private $apiKey = 'f4fad94d58814fd092d3b59d8b3fd708';
+    private $apiKey = 'ed8bef0a072f4942ac40d4a189838066';
 
     // constructor:
     public function __construct() {
@@ -27,23 +27,25 @@ class apiManager {
 
             $query = [
                 'query' => $this->final_url,
-                'number' => 9,
-                'apiKey' => $this->apiKey
+                'number' => 9
             ];
 
             $response = $this->client->request('GET', $this->baseSearchURL, [
-                'query' => $query
+                'query' => $query,
+                'headers' => [
+                    'X-API-KEY' => $this->apiKey
+                ]
             ]);
 
             $data = json_decode($response->getBody(), true);
-            
+
             return $data;
+
         } catch (Exception $e) {
             $data['error'] = "An error occurred.";
             return $data;
         }
     }
-    
 
     // function to create the URL:
     private function urlFormation($urlParameters) {
@@ -63,25 +65,27 @@ class apiManager {
         }
     }
 
-    // function to request specific information about a recipe:
+    // function to request specific information about a recipe:    
     public function obtainRecipeInfo($searchParameters) {
         try {
-            $query = [
-                'apiKey' => $this->apiKey
-            ];
-
-            $response = $this->client->request('GET', $this->baseDetailURL . $searchParameters . "/information", [
-                'query' => $query
-            ]);
+            $response = $this->client->request(
+                'GET',
+                $this->baseDetailURL . $searchParameters . "/information", [
+                    'headers' => [
+                        'X-API-KEY' => $this->apiKey
+                    ]
+                ]
+            );
 
             $data = json_decode($response->getBody(), true);
-            
+
             return $data;
+
         } catch (Exception $e) {
             $data['error'] = "An error occurred.";
             return $data;
         }
-    }   
+    }
 }
 
 ?>

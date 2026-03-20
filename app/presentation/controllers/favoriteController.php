@@ -86,7 +86,13 @@ class favoriteController {
         // get the recipe ID field of the recipe that is to be saved as favorite:
         $recipe_id = $_POST['recipe_id'];
 
+        // remove the reference from the userfavorites table:
         $this->databaseManager->removeUserFavorites($user_id, $recipe_id);
+
+        // remove the recipe in case it is not being used for someone else:
+        if (!$this->databaseManager->isRecipeUsed($recipe_id)) {
+            $this->databaseManager->deleteRecipe($recipe_id);
+        }
 
         $returnUrl = $_POST['return_url'];
         header("Location: $returnUrl");

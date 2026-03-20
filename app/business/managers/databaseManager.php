@@ -104,6 +104,32 @@ class databaseManager {
         $statement->execute();
     }
 
+    // function to check if a recipe is being used for any other user:
+    public function isRecipeUsed($recipe_id) {
+        $statement = $this->connection->prepare(
+            "SELECT COUNT(*) FROM UserFavorites WHERE recipe_id = ?"
+        );
+
+        // ensure the query does not generate SQL injection:
+        $statement->bindParam(1, $recipe_id, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetchColumn() > 0;
+    }
+
+    // function to delete the recipe from the DDBB:
+    public function deleteRecipe($recipe_id) {
+        $statement = $this->connection->prepare(
+            "DELETE FROM Recipes WHERE recipe_id = ?"
+        );
+
+        // ensure the query does not generate SQL injection:
+        $statement->bindParam(1, $recipe_id, PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+
     // function to obtain the user_id knowing the email:
     public function getUserByEmail($user_email) {
         $statement = $this->connection->prepare(
